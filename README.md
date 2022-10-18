@@ -26,6 +26,14 @@ python3 db/migrations/model_service.py
 This will install pip requirements,
 set up a postgres docker container,
 and create the relevant tables in database.
+---
+Note that if you want to run python scripts from a new
+terminal session, you must run the first command in the
+`setup.sh` script in that session from inside of `macaw/`:
+
+```
+export PYTHONPATH=$(pwd):$(echo $PYTHONPATH)
+```
 
 RUNNING
 -------
