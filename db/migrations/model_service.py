@@ -5,7 +5,7 @@ import pandas as pd
 from sqlalchemy.engine import Engine
 
 from db.queries import truncation_query
-from utils.sql_utils import get_engine
+from modeling.io import IO
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
     df_offers = pd.read_parquet(os.path.join(data_path, 'ds_offers.parquet.gzip'))
     df_clicks = pd.read_parquet(os.path.join(data_path, 'ds_clicks.parquet.gzip'))
 
-    engine: Engine = get_engine()
+    engine: Engine = IO.get_engine()
 
     with engine.connect() as connection:
         (connection
