@@ -17,7 +17,6 @@ def predict():
         return Response(response='Must set application\'s model before attempting prediction\n', status=CONFLICT)
 
     request_data = request.get_json()
-    print(f'request_data == {request_data}')
 
     try:
         requested: int = int(request_data.get('requested'))
@@ -40,7 +39,8 @@ def predict():
     except Exception as exception:
         print(exception)
         return Response(
-            response='An internal error occurred. Check your request body contains all 4 necessary parameters.\n',
+            response='An internal error occurred. Check your request body contains all 4 necessary parameters'
+                     f'and that you set the correct model_uuid: {State.model_uuid}.\n',
             status=INTERNAL_SERVER_ERROR)
 
 
