@@ -59,7 +59,7 @@ def set_model():
 
 @app.route('/get_model', methods=['GET'])
 def get_model():
-    return State.model_uuid, OK
+    return {'model_uuid': State.model_uuid}, OK
 
 
 if __name__ == '__main__':
