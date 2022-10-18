@@ -36,6 +36,6 @@ python3 modeling/create_test_models.py
 ```
 then
 ```
-python3 model_service/main.py
+python3 model_service/run.py
 ```
 to run the model service server
