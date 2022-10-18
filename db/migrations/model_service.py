@@ -25,6 +25,10 @@ def main():
 
         df_leads.to_sql(name='leads', con=connection, index=False, if_exists='append')
         df_offers.to_sql(name='offers', con=connection, index=False, if_exists='append')
+
+        # TODO: must confirm the timezone of the `clicked_at` column. Assuming UTC because
+        #  we don't end up using this column in the lifetime of this system anyway,
+        #  but in a production setting must be clarified.
         df_clicks.to_sql(name='clicks', con=connection, index=False, if_exists='append')
 
 

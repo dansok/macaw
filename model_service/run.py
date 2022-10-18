@@ -58,8 +58,8 @@ def set_model():
             status=INTERNAL_SERVER_ERROR)
 
 
-@app.route('/get_model', methods=['GET'])
-def get_model():
+@app.route('/get_current_model', methods=['GET'])
+def get_current_model():
     return {'model_uuid': State.model_uuid}, OK
 
 

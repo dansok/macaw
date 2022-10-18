@@ -3,7 +3,8 @@ ML deployment tool, currently only deploys logistic regressions :-)
 
 NOTES
 -----
-All code has been tested on MacOS Monterey 12.6, running Docker Desktop 4.12.0.
+All code has been tested on MacOS Monterey 12.6,
+running Python 3.10.6, and Docker Desktop 4.12.0.
 
 REQUIREMENTS
 ------------
@@ -26,8 +27,10 @@ python3 db/migrations/model_service.py
 This will install pip requirements,
 set up a postgres docker container,
 and create the relevant tables in database.
+See the contents of these scripts for specifics.
+
 ---
-Note that if you want to run python scripts from a new
+**NOTE** that if you want to run python scripts from a new
 terminal session, you must run the first command in the
 `setup.sh` script in that session from inside of `macaw/`:
 

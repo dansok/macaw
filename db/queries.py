@@ -24,6 +24,6 @@ read_model_artifact_query: str = """
 SELECT * FROM model_artifacts WHERE model_uuid='{model_uuid}';
 """
 
-get_all_model_uuids_query: str = """
+get_all_models_query: str = """
 SELECT model_uuid, description, created_at FROM model_artifacts;
 """

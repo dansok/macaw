@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
 from db.queries import (write_model_artifact_query, read_model_artifact_query, get_leads_query, get_offers_query,
-                        get_clicks_query, get_all_model_uuids_query)
+                        get_clicks_query, get_all_models_query)
 
 
 class IO:
@@ -85,7 +85,7 @@ class IO:
             records: list = list(
                 connection
                 .execution_options(autocommit=True)
-                .execute(get_all_model_uuids_query))
+                .execute(get_all_models_query))
 
             return [{
                 'model_uuid': record[0].hex,
