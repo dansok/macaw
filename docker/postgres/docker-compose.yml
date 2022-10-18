@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  postgres:
+    image:
+      postgres:14.5-alpine
+    working_dir:
+      /app
+    ports:
+      - "5433:5433" # port 5433 instead of 5432 so as not to interfere with an existing instance of postgres already running locally
+    env_file:
+      .env
+    volumes:
+      - ./schemas.sql:/docker-entrypoint-initdb.d/schemas.sql

@@ -1,0 +1,9 @@
+fastparquet==0.8.3
+pandas==1.5.0
+psycopg2==2.9.4
+SQLAlchemy==1.4.41
+python-dotenv==0.21.0
+Flask==2.2.2
+scikit-learn==1.1.2
+scipy==1.9.2
+six==1.16.0
