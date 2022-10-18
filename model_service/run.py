@@ -2,6 +2,7 @@ from http.client import CONFLICT, INTERNAL_SERVER_ERROR, OK
 
 import pandas as pd
 from flask import Flask, request, Response
+from sklearn.linear_model import LogisticRegression
 
 from model_service.state import State
 from modeling.classifier import Classifier
@@ -24,7 +25,7 @@ def predict():
         apr: int = int(request_data.get('apr'))
         credit: int = Classifier.credit_mapping[request_data.get('credit')]
 
-        logistic_regressor, _ = IO.read_model_artifact(model_uuid=State.model_uuid)
+        logistic_regressor: LogisticRegression = IO.read_model_artifact(model_uuid=State.model_uuid)
 
         probabilities: list[float] = logistic_regressor.predict_proba(X=pd.DataFrame({
             'requested': [requested],
@@ -60,6 +61,11 @@ def set_model():
 @app.route('/get_model', methods=['GET'])
 def get_model():
     return {'model_uuid': State.model_uuid}, OK
+
+
+@app.route('/get_all_models', methods=['GET'])
+def get_all_models():
+    return IO.get_all_models(), OK
 
 
 if __name__ == '__main__':

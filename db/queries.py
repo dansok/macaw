@@ -23,3 +23,7 @@ INSERT INTO model_artifacts VALUES ('{model_uuid}', {pickled_model}, '{descripti
 read_model_artifact_query: str = """
 SELECT * FROM model_artifacts WHERE model_uuid='{model_uuid}';
 """
+
+get_all_model_uuids_query: str = """
+SELECT model_uuid, description, created_at FROM model_artifacts;
+"""

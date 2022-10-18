@@ -1,3 +1,5 @@
+SET TIME ZONE 'UTC';
+
 CREATE TABLE leads (
     lead_uuid UUID NOT NULL PRIMARY KEY,
     requested DECIMAL(18, 9),
@@ -17,12 +19,12 @@ CREATE TABLE offers (
 CREATE TABLE clicks (
     offer_id INT NOT NULL PRIMARY KEY,
     clicked_at TIMESTAMP NOT NULL,
---     INDEX click_dt(clicked_at),
-    CONSTRAINT fk_offer_id FOREIGN KEY(offer_id) REFERENCES offers(offer_id)
+    FOREIGN KEY(offer_id) REFERENCES offers(offer_id)
 );
 
 CREATE TABLE model_artifacts (
     model_uuid UUID NOT NULL PRIMARY KEY,
     pickled_model BYTEA NOT NULL,
-    description VARCHAR(500)
+    description VARCHAR(500),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

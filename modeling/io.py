@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
 from db.queries import (write_model_artifact_query, read_model_artifact_query, get_leads_query, get_offers_query,
-                        get_clicks_query)
+                        get_clicks_query, get_all_model_uuids_query)
 
 
 class IO:
@@ -68,7 +68,7 @@ class IO:
         return model_uuid
 
     @staticmethod
-    def read_model_artifact(model_uuid: str) -> (LogisticRegression, str):
+    def read_model_artifact(model_uuid: str) -> LogisticRegression:
         with IO.get_engine().connect() as connection:
             record = next(
                 connection
@@ -76,6 +76,19 @@ class IO:
                 .execute(read_model_artifact_query.format(model_uuid=model_uuid)))
 
             logistic_regression: LogisticRegression = pickle.loads(record[1])
-            description: str = record[2]
 
-            return logistic_regression, description
+            return logistic_regression
+
+    @staticmethod
+    def get_all_models() -> list[Dict[str, str]]:
+        with IO.get_engine().connect() as connection:
+            records: list = list(
+                connection
+                .execution_options(autocommit=True)
+                .execute(get_all_model_uuids_query))
+
+            return [{
+                'model_uuid': record[0].hex,
+                'description': record[1],
+                'created_at': record[2].strftime('%Y-%m-%d %H:%M:%S UTC')
+            } for record in records]
